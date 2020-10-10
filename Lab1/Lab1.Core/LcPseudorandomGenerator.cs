@@ -3,23 +3,19 @@ using System.IO;
 
 namespace Lab1.Core
 {
-    public class LcPseudoRandomGenerator
+    public static class LcPseudoRandomGenerator
     {
-        public StringWriter StringWriter { get; set; }
-
-        public StreamWriter StreamWriter { get; set; }
-
-        public int Generator(int x0, int a, int c, int m, int count = 0)
+        public static int Generator(LcConstants constants, StreamWriter streamWriter = null, StringWriter stringWriter = null, int count = 0)
         {
             var writers = new List<TextWriter>();
 
-            if (StringWriter != null && count != 0)
+            if (stringWriter != null && count != 0)
             {
-                writers.Add(StringWriter);
+                writers.Add(stringWriter);
             }
-            if (StreamWriter != null)
+            if (streamWriter != null)
             {
-                writers.Add(StreamWriter);
+                writers.Add(streamWriter);
             }
 
             if (writers.Count == 0)
@@ -27,7 +23,7 @@ namespace Lab1.Core
                 throw new IOException("no writers were provided");
             }
 
-            int x = x0, i = 0, period = 0;
+            int x = constants.X0, i = 0, period = 0;
 
             while (writers.Count != 0)
             {
@@ -36,18 +32,18 @@ namespace Lab1.Core
                     writer.Write(i == 0 ? $"{x}" : $", {x}");
                 }
 
-                x = (a * x + c) % m;
+                x = (constants.A * x + constants.C) % constants.M;
                 i++;
 
-                if (x == x0 && writers.Contains(StreamWriter))
+                if (x == constants.X0 && writers.Contains(streamWriter))
                 {
                     period = i;
-                    writers.Remove(StreamWriter);
+                    writers.Remove(streamWriter);
                 }
 
-                if (i == count && writers.Contains(StringWriter))
+                if (i == count && writers.Contains(stringWriter))
                 {
-                    writers.Remove(StringWriter);
+                    writers.Remove(stringWriter);
                 }
             }
 
