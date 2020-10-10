@@ -64,10 +64,10 @@ namespace Lab1.Test
 
         public static readonly object[][] LastNumberTestData = {
             new object[] { _variant1, ", 64" },
-            new object[] { _variant2, ", 1606108730" },
-            new object[] { _variant3, ", 1606108730" },
+            new object[] { _variant2, ", 278" },
+            new object[] { _variant3, ", 1404" },
             new object[] { _variant22, ", 1606108730" },
-            new object[] { _variant23, ", 1606108730" },
+            new object[] { _variant23, ", 1878093809" },
         };
 
         [Theory]
