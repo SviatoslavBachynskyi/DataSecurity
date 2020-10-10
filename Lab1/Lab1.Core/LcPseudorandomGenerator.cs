@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Lab1.Core
 {
-    public class LcPseudorandomGenerator
+    public class LcPseudoRandomGenerator
     {
         public StringWriter StringWriter { get; set; }
 
