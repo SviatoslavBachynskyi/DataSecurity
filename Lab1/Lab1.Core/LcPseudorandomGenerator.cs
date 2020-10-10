@@ -5,9 +5,13 @@ namespace Lab1.Core
 {
     public static class LcPseudoRandomGenerator
     {
-        public static int Generator(LcConstants constants, StreamWriter streamWriter = null, StringWriter stringWriter = null, int count = 0)
+        public static uint Generate(LcConstants constants, StreamWriter streamWriter = null, StringWriter stringWriter = null, uint count = 0)
         {
             var writers = new List<TextWriter>();
+            ulong x0 = constants.X0;
+            ulong a = constants.A;
+            ulong c = constants.C;
+            ulong m = constants.M;
 
             if (stringWriter != null && count != 0)
             {
@@ -23,7 +27,8 @@ namespace Lab1.Core
                 throw new IOException("no writers were provided");
             }
 
-            int x = constants.X0, i = 0, period = 0;
+            ulong x = constants.X0;
+            uint i = 0, period = 0;
 
             while (writers.Count != 0)
             {
@@ -32,7 +37,7 @@ namespace Lab1.Core
                     writer.Write(i == 0 ? $"{x}" : $", {x}");
                 }
 
-                x = (constants.A * x + constants.C) % constants.M;
+                x = ((a  % m * x % m) % m + c % m) % m;
                 i++;
 
                 if (x == constants.X0 && writers.Contains(streamWriter))

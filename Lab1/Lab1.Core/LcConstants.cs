@@ -2,7 +2,7 @@
 {
     public class LcConstants
     {
-        public LcConstants(int x0, int a, int c, int m)
+        public LcConstants(uint x0, uint a, uint c, uint m)
         {
             X0 = x0;
             A = a;
@@ -10,12 +10,12 @@
             M = m;
         }
 
-        public int X0 { get; private set; }
+        public uint X0 { get; private set; }
 
-        public int A { get; private set; }
+        public uint A { get; private set; }
         
-        public int C { get; private set; }
+        public uint C { get; private set; }
         
-        public int M { get; private set; }
+        public uint M { get; private set; }
     }
 }
