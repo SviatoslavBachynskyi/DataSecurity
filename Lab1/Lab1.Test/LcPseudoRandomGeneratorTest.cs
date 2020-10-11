@@ -63,22 +63,23 @@ namespace Lab1.Test
         }
 
         public static readonly object[][] LastNumberTestData = {
-            new object[] { _variant1, ", 64" },
-            new object[] { _variant2, ", 278" },
-            new object[] { _variant3, ", 1404" },
-            new object[] { _variant22, ", 1606108730" },
-            new object[] { _variant23, ", 1878093809" },
+            new object[] { _variant1, 2, ", 64" },
+            new object[] { _variant2, 88, ", 278" },
+            new object[] { _variant3, 2818, ", 1404" },
+            new object[] { _variant22, 2147483646, ", 1606108730" },
+            new object[] { _variant23, 3, ", 1878093809" },
         };
 
         [Theory]
         [MemberData(nameof(LastNumberTestData))]
-        public void LcPseudoRandomGenerator_PositiveCase_WritesLastNumberToStreamWriter(LcConstants variant, string expected)
+        public void LcPseudoRandomGenerator_PositiveCase_WritesLastNumberToStreamWriter(LcConstants variant, uint expectedPeriod, string expectedLastNumber)
         {
             var streamWriterMock = new StreamWriterMock(_memoryResult);
 
-            LcPseudoRandomGenerator.Generate(variant, streamWriterMock);
+            var actualPeriod = LcPseudoRandomGenerator.Generate(variant, streamWriterMock);
 
-            Assert.Equal(expected, streamWriterMock.LastWriteCall);
+            Assert.Equal(expectedLastNumber, streamWriterMock.LastWriteCall);
+            Assert.Equal(expectedPeriod, actualPeriod);
         }
 
         [Fact]
