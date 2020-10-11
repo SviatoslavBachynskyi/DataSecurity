@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Lab1.ViewModels;
 
 namespace Lab1
 {
@@ -20,9 +8,25 @@ namespace Lab1
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindowViewModel MainWindowViewModel { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            MainWindowViewModel = new MainWindowViewModel()
+            {
+                InputParametersViewModel = new InputParametersViewModel()
+                {
+                    X0 = "8",
+                    A = "1024",
+                    C = "2",
+                    M = "4095",
+                    Count = "100"
+                }
+            };
+
+            this.DataContext = MainWindowViewModel;
         }
     }
 }

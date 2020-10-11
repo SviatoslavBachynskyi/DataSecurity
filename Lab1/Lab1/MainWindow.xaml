@@ -4,9 +4,82 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab1"
+        xmlns:viewModels="clr-namespace:Lab1.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel }">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Input Parameters:" Margin="10, 0, 10, 10" DataContext="{Binding InputParametersViewModel}">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <Label Content="X0:" Target="{Binding ElementName=X0Value}"></Label>
+                    <TextBox Name="X0Value" Text="{ Binding X0}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+                    <Label Content="A:" Target="{Binding ElementName=AValue}"></Label>
+                    <TextBox Name="AValue" Text="{ Binding A}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Label Content="C:" Target="{Binding ElementName=CValue}"></Label>
+                    <TextBox Name="CValue" Text="{ Binding C}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <Label Content="M:" Target="{Binding ElementName=MValue}"></Label>
+                    <TextBox Name="MValue" Text="{ Binding M}"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4">
+                    <Label Content="Count:" Target="{Binding ElementName=CountValue}"></Label>
+                    <TextBox Name="CountValue" Text="{ Binding Count}"></TextBox>
+                </StackPanel>
+
+                <Button Grid.Row="5">Save</Button>
+            </Grid>
+        </GroupBox>
+
+        <Grid Grid.Column="1" DataContext="{Binding OutputViewModel}" Margin="10, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Width="{Binding ActualWidth, ElementName=AValue}" HorizontalAlignment="Left">
+                <Label Content="Period:" Target="{Binding ElementName=PeriodValue}"></Label>
+                <TextBox Name="PeriodValue" Text="{ Binding Period}" IsReadOnly="True"></TextBox>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Generated Sequence:" Target="{Binding ElementName=GeneratedSequenceValue}"></Label>
+                <TextBox Grid.Row="1" Name="GeneratedSequenceValue" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"></TextBox>
+            </Grid>
+
+            <!--
+            <RichTextBox Grid.Row="1" IsReadOnly="True"></RichTextBox>
+            -->
+        </Grid>
 
     </Grid>
 </Window>
