@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Lab1.ViewModels
+﻿namespace Lab1.ViewModels
 {
-    public class OutputViewModel
+    public class OutputViewModel : BaseViewModel
     {
-        public string Period { get; set; }
-        public string GeneratedSequence { get; set; }
+        private string _period;
+
+        private string _generatedSequence;
+
+        public string Period
+        {
+            get => _period;
+            set
+            {
+                _period = value;
+                OnPropertyChanged(nameof(Period));
+            }
+        }
+
+
+        public string GeneratedSequence
+        {
+            get => _generatedSequence;
+            set
+            {
+                _generatedSequence = value;
+                OnPropertyChanged(nameof(GeneratedSequence));
+            }
+        }
     }
 }

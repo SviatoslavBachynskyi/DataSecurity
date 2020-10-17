@@ -23,6 +23,10 @@ namespace Lab1
                     C = "2",
                     M = "4095",
                     Count = "100"
+                },
+                OutputViewModel = new OutputViewModel()
+                {
+                    Period = ""
                 }
             };
 

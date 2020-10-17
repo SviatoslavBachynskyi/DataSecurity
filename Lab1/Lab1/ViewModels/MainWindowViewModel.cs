@@ -1,6 +1,6 @@
 ﻿namespace Lab1.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
         public InputParametersViewModel InputParametersViewModel { get; set; }
 
