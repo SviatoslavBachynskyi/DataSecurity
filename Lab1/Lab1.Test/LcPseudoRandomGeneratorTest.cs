@@ -14,7 +14,7 @@ namespace Lab1.Test
 
         private static readonly LcConstants _variant2 = new LcConstants(4, 243, 1, 2047);
 
-        private static readonly LcConstants _variant3 = new LcConstants(8, 1024, 2, 14095);
+        private static readonly LcConstants _variant3 = new LcConstants(8, 1024, 2, 4095);
 
         private static readonly LcConstants _variant22 = new LcConstants(31, 16807, 17711, 2147483647);
         
@@ -37,7 +37,7 @@ namespace Lab1.Test
         public static readonly object[][] StringWriterTestData = {
             new object[] { _variant1, 4, "2, 64, 2, 64" },
             new object[] { _variant2, 4, "4, 973, 1035, 1772" },
-            new object[] { _variant3, 10, "8, 8194, 4133, 3694, 5198, 8939, 5883, 5629, 13338, 59" },
+            new object[] { _variant3, 10, "8, 4, 3, 3074, 2818, 2754, 2738, 2734, 2733, 1709" },
             new object[] { _variant22, 15, "31, 538728, 464484619, 489952399, 1177685106, 2144303501, 238395064, 1648856704, 1205660951, 2035411723, 1897833109, 306471783, 1205489086, 1294360315, 304487806" },
             new object[] { _variant23, 20, "33, 2191345, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, " +
                                            "1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809, 1878093809" },
@@ -65,7 +65,7 @@ namespace Lab1.Test
         public static readonly object[][] LastNumberTestData = {
             new object[] { _variant1, 2, ", 64" },
             new object[] { _variant2, 88, ", 278" },
-            new object[] { _variant3, 2818, ", 1404" },
+            new object[] { _variant3, 18, ", 24" },
             new object[] { _variant22, 2147483646, ", 1606108730" },
             new object[] { _variant23, 3, ", 1878093809" },
         };
