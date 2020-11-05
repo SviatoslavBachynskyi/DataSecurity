@@ -12,7 +12,6 @@ namespace Lab1.Core
             const ulong lastAcceptedValue = 2147483648;
 
             var writers = new List<TextWriter>();
-            ulong x0 = constants.X0;
             ulong a = constants.A;
             ulong c = constants.C;
             ulong m = constants.M;
@@ -54,7 +53,7 @@ namespace Lab1.Core
                     }
                     else
                     {
-                        if (x == lastAcceptedValue)
+                        if (x == lastAcceptedValue - 1)
                             lastPossibleNumberAppeared = true;
                         else
                             numberAppearanceArray.Set((int)x, true);
