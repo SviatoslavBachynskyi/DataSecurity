@@ -1,3 +1,4 @@
+using System.IO;
 using Lab2.Core;
 using Xunit;
 
@@ -23,6 +24,16 @@ namespace Lab2.Test
         public void Hash_Positive_ReturnsHash(string input, string expected)
         {
             var actual = _generator.Hash(input);
+
+            Assert.Equal(expected, actual);
+        } 
+        
+        [Theory]
+        [InlineData(@"D:\123Md5Test.txt", "57EDF4A22BE3C955AC49DA2E2107B67A")]
+        [InlineData(@"D:\Films\The.Best.Years.Of.Our.Lives.1946.x264.BDRip.(1080p).mkv", "D3E6193E23C60CD19E41BBF4BBFD7BE1")]
+        public void Hash_File_ReturnsHash(string filePath, string expected)
+        {
+            var actual = _generator.Hash(new BinaryReader(File.OpenRead(filePath)));
 
             Assert.Equal(expected, actual);
         }
