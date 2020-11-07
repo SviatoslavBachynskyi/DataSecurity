@@ -56,7 +56,7 @@ namespace Lab2.Core
                 }
                 else
                 {
-                    Buffer.BlockCopy(new[] { (ulong)_reader.BaseStream.Length },0, _buffer, BytesBeforeLength, BytesInBlock - BytesBeforeLength);
+                    Buffer.BlockCopy(new[] { (ulong)_reader.BaseStream.Length * 8 },0, _buffer, BytesBeforeLength, BytesInBlock - BytesBeforeLength);
                     yield return _buffer;
                     yield break;
                 }
