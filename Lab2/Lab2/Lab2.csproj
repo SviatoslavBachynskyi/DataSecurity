@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lab2.Core\Lab2.Core.csproj" />
+  </ItemGroup>
+
 </Project>

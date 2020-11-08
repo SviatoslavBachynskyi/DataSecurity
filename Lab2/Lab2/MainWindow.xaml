@@ -4,9 +4,151 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab2"
+        xmlns:viewModels="clr-namespace:Lab2.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="650" Width="800" d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel }">
+    <Grid Name="Body">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <GroupBox Grid.Row="0" Header="Text Hashing:" Margin="10, 0, 10, 10" DataContext="{Binding TextHashingViewModel}">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <GroupBox Grid.Row="0" Header="Input:" Margin="10, 0, 10, 10">
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0">
+                            <Label Content="Message:" Target="{Binding ElementName=MessageValue}"></Label>
+                            <TextBox Name="MessageValue" Text="{ Binding Path = Message, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+
+                        <Button Grid.Row="1" Margin="5" MaxHeight="20"
+                            Command="{Binding Generate}"
+                            CommandParameter="{Binding}">
+                            Generate
+                        </Button>
+
+                        <Button Grid.Row="2" Margin="5" MaxHeight="20"
+                            Command="{Binding SaveToFile}"
+                            CommandParameter="{Binding}">
+                            Save To File
+                        </Button>
+
+                    </Grid>
+                </GroupBox>
+
+                <StackPanel Grid.Column="1">
+                    <Label Content="Checksum:" Target="{Binding ElementName=TextCheckSum}"></Label>
+                    <TextBox Name="TextCheckSum" Text="{Binding Checksum}" IsReadOnly="True"></TextBox>
+                </StackPanel>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row ="1" Header="File Hashing:" DataContext="{Binding FileHashingViewModel}">
+
+
+            <Grid >
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <GroupBox Grid.Row="0" Grid.Column="0" Header="Input:" Margin="10, 0, 10, 10">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Button Grid.Row="0" Margin="5" MaxHeight="20"
+                            Command="{Binding OpenFile}"
+                            CommandParameter="{Binding}">
+                            Open File
+                        </Button>
+                        
+                        <Button Grid.Row="1" Margin="5" MaxHeight="20"
+                                Command="{Binding Generate}"
+                                CommandParameter="{Binding }">
+                            Generate
+                        </Button>
+
+                        <Button Grid.Row="2" Margin="5" MaxHeight="20"
+                            Command="{Binding SaveToFile}"
+                            CommandParameter="{Binding }">
+                            Save To File
+                        </Button>
+                        
+                        <Button Grid.Row="3" Margin="5" MaxHeight="20"
+                                Command="{Binding VerifyChecksum}"
+                                CommandParameter="{Binding }">
+                            Verify Checksum
+                        </Button>
+
+                    </Grid>
+                </GroupBox>
+
+                <Grid Grid.Column="1" Margin="10, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <Label Content="File Path:" Target="{Binding ElementName=FilePath}"></Label>
+                        <TextBox Name="FilePath" Text="{Binding FilePath}" IsReadOnly="True"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1">
+                        <Label Content="Generated Checksum" Target="{Binding ElementName=GeneratedChecksum}"></Label>
+                        <TextBox Name="GeneratedChecksum" Text="{Binding GeneratedChecksum}" IsReadOnly="True"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2">
+                        <Label Content="Loaded Checksum:" Target="{Binding ElementName=LoadedChecksum}"></Label>
+                        <TextBox Name="LoadedChecksum" Text="{Binding LoadedChecksum}" IsReadOnly="True"></TextBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3">
+                        <Label HorizontalAlignment="Center" Name="VerificationStatus" FontWeight="Bold" FontSize="18">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding VerifiedSuccessfully}" Value="True">
+                                            <Setter Property="Content" Value="Checksum is correct!" />
+                                            <Setter Property="Foreground" Value="Green"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding VerifiedSuccessfully}" Value="False">
+                                            <Setter Property="Content" Value="Checksum is different!" />
+                                            <Setter Property="Foreground" Value="Red"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
