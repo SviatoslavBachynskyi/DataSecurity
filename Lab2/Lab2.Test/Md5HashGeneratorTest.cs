@@ -6,7 +6,7 @@ namespace Lab2.Test
 {
     public class Md5HashGeneratorTest
     {
-        private Md5HashGenerator _generator;
+        private readonly Md5HashGenerator _generator;
 
         public Md5HashGeneratorTest()
         {

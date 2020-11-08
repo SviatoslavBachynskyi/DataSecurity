@@ -63,7 +63,7 @@ namespace Lab2.Core
             return val << shift | val >> (32 - shift);
         }
 
-        private static Cycle[] Cycles =
+        private static readonly Cycle[] Cycles =
         {
             new Cycle()
             {
