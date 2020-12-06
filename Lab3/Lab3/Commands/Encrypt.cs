@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.IO;
+using Lab3.Core;
 
 namespace Lab3.Commands
 {
@@ -27,7 +28,9 @@ namespace Lab3.Commands
 
             if (dialog.ShowDialog() ?? false)
             {
-
+                var rc5 = new Rc5CbcPad();
+                rc5.Encrypt(new BinaryReader(File.OpenRead(vm.FilePath)), vm.KeyPhrase, 
+                    new BinaryWriter(File.OpenWrite(dialog.FileName)));
             }
         }
     }
