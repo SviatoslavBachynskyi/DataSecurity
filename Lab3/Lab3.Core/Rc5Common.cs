@@ -6,19 +6,40 @@ using static Lab3.Core.Rc5Constants;
 
 namespace Lab3.Core
 {
-    internal class Rc5Common
+    internal static class Rc5Common
     {
-        private Md5HashGenerator hashGenerator = new Md5HashGenerator();
+        private static readonly Md5HashGenerator HashGenerator = new Md5HashGenerator();
 
-        public void Encrypt(BinaryReader input, string keyPhrase, BinaryWriter output)
+        public static byte[] Encrypt(byte[] block, ulong[] s)
         {
+            var m = new ulong[2];
 
+            Buffer.BlockCopy(block, 0, m, 0, 2 * U);
+
+            var a = m[0];
+            var b = m[1];
+
+            a += s[0];
+            b += s[1];
+
+            for(int i =1; i <= R; i++)
+            {
+                a = Cls(a + b, b) + s[2 * i];
+                b = Cls(b + a, a) + s[2 * i + 1];
+            }
+
+            m[0] = a;
+            m[1] = b;
+            var result = new byte[2 * U];
+
+            Buffer.BlockCopy(m, 0, result,0, 2 * U);
+            return result;
         }
 
-        public byte[] GenerateKey(string keyPhrase)
+        public static byte[] GenerateKey(string keyPhrase)
         {
-            var endBlock = hashGenerator.HashBytes(keyPhrase);
-            var startBlock = hashGenerator.HashBytes(new BinaryReader(new MemoryStream(endBlock)));
+            var endBlock = HashGenerator.HashBytes(keyPhrase);
+            var startBlock = HashGenerator.HashBytes(new BinaryReader(new MemoryStream(endBlock)));
             var result = new byte[B];
 
             Buffer.BlockCopy(startBlock, 0, result, 0, HashSize);
@@ -26,7 +47,7 @@ namespace Lab3.Core
             return result;
         }
 
-        public ulong[] CreateSArray(byte[] key)
+        public static ulong[] CreateSArray(byte[] key)
         {
             var c = B / U + (B % U == 0 ? 0 : 1);
             // created L using buffer copy(it forms L array from key (little endian order, if key length is not enough, the rest is 0)
