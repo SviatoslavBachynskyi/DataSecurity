@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Lab2.Core;
+using System;
 using System.IO;
-using System.Linq;
-using Lab1.Core;
-using Lab2.Core;
-using static Lab3.Core.Rc5Constants;
 using static Lab3.Core.BinaryOperators;
+using static Lab3.Core.Rc5Constants;
 
 namespace Lab3.Core
 {
