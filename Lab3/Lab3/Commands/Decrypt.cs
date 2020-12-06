@@ -1,4 +1,5 @@
-﻿using Lab3.ViewModels;
+﻿using Lab3.Core;
+using Lab3.ViewModels;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -27,7 +28,10 @@ namespace Lab3.Commands
 
             if (dialog.ShowDialog() ?? false)
             {
-
+                var rc5 = new Rc5CbcPad();
+                using var input = new BinaryReader(File.OpenRead(vm.FilePath));
+                using var output = new BinaryWriter(File.OpenWrite(dialog.FileName));
+                rc5.Decrypt(input, vm.KeyPhrase, output);
             }
         }
     }

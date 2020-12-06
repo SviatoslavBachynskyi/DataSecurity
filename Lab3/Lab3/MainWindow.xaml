@@ -44,7 +44,7 @@
                 </Button>
 
                 <Button Grid.Row="3" Margin="5" MaxHeight="20"
-                                Command="{Binding Encrypt}"
+                                Command="{Binding Decrypt}"
                                 CommandParameter="{Binding }">
                     Decrypt
                 </Button>
