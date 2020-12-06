@@ -11,7 +11,7 @@ namespace Lab2.Core
         private const int NumberOfCycles = 4;
         private const int ResultLength = 16;
 
-        public string Hash(BinaryReader binaryReader)
+        public byte[] HashBytes(BinaryReader binaryReader)
         {
             var md5Enumerable = new Md5BinaryEnumerable(binaryReader);
             uint a = 0x67452301, b = 0xEFCDAB89, c = 0x98BADCFE, d = 0x10325476;
@@ -44,18 +44,27 @@ namespace Lab2.Core
             }
 
             var resultBytes = new byte[ResultLength];
-            Buffer.BlockCopy(new []{a, b, c, d}, 0, resultBytes, 0, ResultLength);
-
-            return String.Join("",resultBytes.Select(elem =>  $"{elem:X2}"));
+            Buffer.BlockCopy(new[] { a, b, c, d }, 0, resultBytes, 0, ResultLength);
+            return resultBytes;
         }
 
-        public string Hash(string textInput)
+        public byte[] HashBytes(string textInput)
         {
             var binaryReader = new BinaryReader(
                 new MemoryStream(Encoding.ASCII.GetBytes(textInput ?? ""))
             );
 
-            return Hash(binaryReader);
+            return HashBytes(binaryReader);
+        }
+
+        public string Hash(BinaryReader binaryReader)
+        {
+            return String.Join("", HashBytes(binaryReader).Select(elem => $"{elem:X2}"));
+        }
+
+        public string Hash(string textInput)
+        {
+            return String.Join("", HashBytes(textInput).Select(elem => $"{elem:X2}"));
         }
 
         private uint Cls(uint val, int shift)
