@@ -4,15 +4,38 @@ using System;
 using System.IO;
 using System.Linq;
 using static Lab3.Core.Rc5Constants;
+using static Lab3.Core.Rc5Common;
 
 namespace Lab3.Core
 {
     public class Rc5CbcPad
     {
-        private Md5HashGenerator hashGenerator = new Md5HashGenerator();
-
         public void Encrypt(BinaryReader input, string keyPhrase, BinaryWriter output)
         {
+            var enumerable = new Rc5BinaryEnumerable(input);
+            var vector = GenerateVector();
+            var key = GenerateKey(keyPhrase);
+            var s = CreateSArray(key);
+            for (int i = 0; i < B; i++)
+            {
+                key[i] = 0;
+            }
+
+            var vectorEncrypted = Rc5Common.Encrypt(vector, s);
+            output.Write(vectorEncrypted);
+
+            foreach (var block in enumerable)
+            {
+                var forEncryption = block.Zip(vector, (fst, snd) => (byte)(fst ^ snd)).ToArray();
+                var encrypted = Rc5Common.Encrypt(forEncryption, s);
+                output.Write(encrypted);
+                vector = encrypted;
+            }           
+
+            for (int i = 0; i < SArraySize; i++)
+            {
+                s[i] = 0;
+            }
 
         }
 
