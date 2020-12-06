@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Lab1.Core">
+      <HintPath>..\..\Lab1\Lab1.Core\bin\Debug\netcoreapp3.1\Lab1.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Lab2.Core">
+      <HintPath>..\..\Lab2\Lab2.Core\bin\Debug\netcoreapp3.1\Lab2.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
