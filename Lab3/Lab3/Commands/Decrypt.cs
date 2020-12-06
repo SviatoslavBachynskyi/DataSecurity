@@ -30,7 +30,7 @@ namespace Lab3.Commands
             {
                 var rc5 = new Rc5CbcPad();
                 using var input = new BinaryReader(File.OpenRead(vm.FilePath));
-                using var output = new BinaryWriter(File.OpenWrite(dialog.FileName));
+                using var output = new BinaryWriter(File.Create(dialog.FileName));
                 rc5.Decrypt(input, vm.KeyPhrase, output);
             }
         }

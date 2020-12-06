@@ -29,7 +29,7 @@ namespace Lab3.Core
                 var encrypted = Rc5Common.Encrypt(forEncryption, s);
                 output.Write(encrypted);
                 vector = encrypted;
-            }           
+            }
 
             for (int i = 0; i < SArraySize; i++)
             {
@@ -54,8 +54,10 @@ namespace Lab3.Core
             {
                 var partlyDecrypted = Rc5Common.Decrypt(block, s);
                 var decrypted = partlyDecrypted.Zip(vector, (fst, snd) => (byte)(fst ^ snd)).ToArray();
-                output.Write(decrypted);
-                vector = block;
+                output.Write(input.BaseStream.Length != input.BaseStream.Position ?
+                    decrypted :
+                    decrypted.Take(2 * U - decrypted.Last()).ToArray()); 
+                Array.Copy(block, vector, 2 * U);
             }
 
             for (int i = 0; i < SArraySize; i++)
