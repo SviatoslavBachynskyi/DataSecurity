@@ -24,8 +24,8 @@ namespace Lab3.Core
 
             for(int i =1; i <= R; i++)
             {
-                a = Cls(a + b, b) + s[2 * i];
-                b = Cls(b + a, a) + s[2 * i + 1];
+                a = Cls(a ^ b, b) + s[2 * i];
+                b = Cls(b ^ a, a) + s[2 * i + 1];
             }
 
             m[0] = a;
@@ -33,6 +33,33 @@ namespace Lab3.Core
             var result = new byte[2 * U];
 
             Buffer.BlockCopy(m, 0, result,0, 2 * U);
+            return result;
+        }
+
+        public static byte[] Decrypt(byte[] block, ulong[] s)
+        {
+            var m = new ulong[2];
+
+            Buffer.BlockCopy(block, 0, m, 0, 2 * U);
+
+            var a = m[0];
+            var b = m[1];
+
+
+            for (int i = R; i >= 1; i--)
+            {
+                b = Crs(b - s[2 * i + 1], a) ^ a;
+                a = Crs(a - s[2 * i], b) ^ b;
+            }
+
+
+            a -= s[0];
+            b -= s[1];
+            m[0] = a;
+            m[1] = b;
+            var result = new byte[2 * U];
+
+            Buffer.BlockCopy(m, 0, result, 0, 2 * U);
             return result;
         }
 

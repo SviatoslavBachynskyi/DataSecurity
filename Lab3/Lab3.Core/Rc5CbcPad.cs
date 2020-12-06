@@ -35,7 +35,6 @@ namespace Lab3.Core
             {
                 s[i] = 0;
             }
-
         }
 
         private byte[] GenerateVector()
