@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Lab3.Core">
+      <HintPath>..\..\Lab3\Lab3.Core\bin\Debug\netcoreapp3.1\Lab3.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
