@@ -6,18 +6,18 @@ using Lab3.Core;
 
 namespace Lab4.Commands
 {
-    public class Encrypt : BaseCommand
+    public class Rc5Encrypt : BaseCommand
     {
         public override bool CanExecute(object parameter)
         {
-            var vm = (MainWindowViewModel)parameter;
+            var vm = (Rc5ViewModel)parameter;
 
             return !String.IsNullOrEmpty(vm?.FilePath);
         }
 
         public override void Execute(object parameter)
         {
-            var vm = (MainWindowViewModel)parameter;
+            var vm = (Rc5ViewModel)parameter;
 
             var dialog = new SaveFileDialog()
             {

@@ -4,7 +4,7 @@ using System;
 
 namespace Lab4.Commands
 {
-    public class OpenFile : BaseCommand
+    public class Rc5OpenFile : BaseCommand
     {
         public override bool CanExecute(object parameter)
         {
@@ -13,7 +13,7 @@ namespace Lab4.Commands
 
         public override void Execute(object parameter)
         {
-            var vm = (MainWindowViewModel)parameter;
+            var vm = (Rc5ViewModel)parameter;
 
             OpenFileDialog dialog = new OpenFileDialog()
             {
