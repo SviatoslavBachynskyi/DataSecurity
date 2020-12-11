@@ -1,6 +1,7 @@
 ﻿using Lab4.ViewModels;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using Lab3.Core;
 
@@ -28,11 +29,15 @@ namespace Lab4.Commands
 
             if (dialog.ShowDialog() ?? false)
             {
+                var sw = Stopwatch.StartNew();
                 var rc5 = new Rc5CbcPad();
                 using var input = new BinaryReader(File.OpenRead(vm.FilePath));
                 using var output = new BinaryWriter(File.Create(dialog.FileName));
                 rc5.Decrypt(input, vm.KeyPhrase, output);
+                sw.Stop();
+                vm.DecryptionTime = $"Decryption took {sw.ElapsedMilliseconds} ms";
             }
+
         }
     }
 }

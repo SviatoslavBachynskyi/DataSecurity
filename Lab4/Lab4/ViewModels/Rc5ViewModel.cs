@@ -38,5 +38,29 @@ namespace Lab4.ViewModels
                 OnPropertyChanged(nameof(KeyPhrase));
             }
         }
+
+        private string _encryptionTime;
+
+        public string EncryptionTime
+        {
+            get => _encryptionTime;
+            set
+            {
+                _encryptionTime = value;
+                OnPropertyChanged(nameof(EncryptionTime));
+            }
+        }
+
+        private string _decryptionTime;
+
+        public string DecryptionTime
+        {
+            get => _decryptionTime;
+            set
+            {
+                _decryptionTime = value;
+                OnPropertyChanged(nameof(DecryptionTime));
+            }
+        }
     }
 }

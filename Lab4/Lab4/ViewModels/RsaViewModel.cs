@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using Lab4.Commands;
 
@@ -7,6 +8,10 @@ namespace Lab4.ViewModels
 {
     public class RsaViewModel : BaseViewModel
     {
+        public const int EncryptBlockLength = 64;
+        public const int DecryptBlockLength = 128;
+        public RSACryptoServiceProvider CryptoService { get; } = new RSACryptoServiceProvider();
+
         private string _filePath;
 
         public string FilePath
@@ -27,15 +32,31 @@ namespace Lab4.ViewModels
 
         public RsaEncrypt RsaEncrypt { get; set; } = new RsaEncrypt();
 
-        private string _keyPhrase;
+        public RsaImport RsaImport { get; set; } = new RsaImport();
 
-        public string KeyPhrase
+        public RsaExport RsaExport { get; set; } = new RsaExport();
+
+        private string _encryptionTime;
+
+        public string EncryptionTime
         {
-            get => _keyPhrase;
+            get => _encryptionTime;
             set
             {
-                _keyPhrase = value;
-                OnPropertyChanged(nameof(KeyPhrase));
+                _encryptionTime = value;
+                OnPropertyChanged(nameof(EncryptionTime));
+            }
+        }
+
+        private string _decryptionTime;
+
+        public string DecryptionTime
+        {
+            get => _decryptionTime;
+            set
+            {
+                _decryptionTime = value;
+                OnPropertyChanged(nameof(DecryptionTime));
             }
         }
     }

@@ -73,6 +73,9 @@
                         <Label Content="File Path:" Target="{Binding ElementName=FilePath}"></Label>
                         <TextBox Name="FilePath" Text="{Binding FilePath}" IsReadOnly="True"></TextBox>
                     </StackPanel>
+
+                    <Label Grid.Row="1"  Content="{Binding EncryptionTime}"></Label>
+                    <Label Grid.Row="2"  Content="{Binding DecryptionTime}"></Label>
                 </Grid>
             </Grid>
         </GroupBox>
@@ -93,29 +96,38 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0">
-                            <Label Content="Phrase for key:" Target="{Binding ElementName=RsaMessageValue}"></Label>
-                            <TextBox Name="RsaMessageValue" Text="{Binding Path = KeyPhrase, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-
-                        <Button Grid.Row="1" Margin="5" MaxHeight="20"
+                        
+                        <Button Grid.Row="0" Margin="5" MaxHeight="20"
                             Command="{Binding RsaOpenFile}"
                             CommandParameter="{Binding}">
                             Open File
                         </Button>
 
-                        <Button Grid.Row="2" Margin="5" MaxHeight="20"
+                        <Button Grid.Row="1" Margin="5" MaxHeight="20"
                         Command="{Binding RsaEncrypt}"
                         CommandParameter="{Binding }">
                             Encrypt
                         </Button>
 
-                        <Button Grid.Row="3" Margin="5" MaxHeight="20"
+                        <Button Grid.Row="2" Margin="5" MaxHeight="20"
                                 Command="{Binding RsaDecrypt}"
                                 CommandParameter="{Binding }">
                             Decrypt
+                        </Button>
+
+                        <Button Grid.Row="3" Margin="5" MaxHeight="20"
+                                Command="{Binding RsaImport}"
+                                CommandParameter="{Binding }">
+                            Import Key
+                        </Button>
+
+                        <Button Grid.Row="4" Margin="5" MaxHeight="20"
+                                Command="{Binding RsaExport}"
+                                CommandParameter="{Binding }">
+                            Export Key
                         </Button>
 
                     </Grid>
@@ -133,6 +145,8 @@
                         <Label Content="File Path:" Target="{Binding ElementName=RsaFilePath}"></Label>
                         <TextBox Name="RsaFilePath" Text="{Binding FilePath}" IsReadOnly="True"></TextBox>
                     </StackPanel>
+                        <Label Grid.Row="1"  Content="{Binding EncryptionTime}"></Label>
+                        <Label Grid.Row="2"  Content="{Binding DecryptionTime}"></Label>
                 </Grid>
             </Grid>
         </GroupBox>

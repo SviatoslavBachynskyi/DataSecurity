@@ -1,6 +1,7 @@
 ﻿using Lab4.ViewModels;
 using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 using Lab3.Core;
 
@@ -28,10 +29,35 @@ namespace Lab4.Commands
 
             if (dialog.ShowDialog() ?? false)
             {
-                var rc5 = new Rc5CbcPad();
+
                 using var input = new BinaryReader(File.OpenRead(vm.FilePath));
                 using var output = new BinaryWriter(File.Create(dialog.FileName));
-                rc5.Encrypt(input, vm.KeyPhrase, output);
+                var buffer = new byte[RsaViewModel.EncryptBlockLength];
+                int bytesRead = 0;
+
+                var sw = Stopwatch.StartNew();
+                do
+                {
+                    bytesRead = input.Read(buffer);
+
+                    if (bytesRead == 0)
+                        continue;
+                    if (bytesRead != RsaViewModel.EncryptBlockLength)
+                    {
+                        var lastBlock = new byte[bytesRead];
+                        Buffer.BlockCopy(buffer, 0, lastBlock, 0, bytesRead);
+                        buffer = lastBlock;
+                    }
+
+                    var encrypted = vm.CryptoService.Encrypt(buffer, false);
+                    output.Write(encrypted);
+
+                } while (bytesRead == RsaViewModel.EncryptBlockLength);
+
+                sw.Stop();
+
+                vm.EncryptionTime = $"Encryption took {sw.ElapsedMilliseconds} ms";
+
             }
         }
     }
